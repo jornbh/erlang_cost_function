@@ -9,7 +9,7 @@
             "type": "erlang",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "arguments": "-s cost_function test_me"
+            "arguments": "-s cost_core test_me",
         }
     ]
 }

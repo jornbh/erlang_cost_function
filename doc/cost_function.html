@@ -10,25 +10,57 @@
 <hr>
 
 <h1>Module cost_function</h1>
-<ul class="index"><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+<ul class="index"><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+
+
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-elevator_tuple">elevator_tuple()</a></h3>
+<p><tt>elevator_tuple() = {term(), integer(), up | down | idle}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-order_tuple">order_tuple()</a></h3>
+<p><tt>order_tuple() = {term(), integer(), hall_up | hall_down | cab}</tt></p>
 
 
 <h2><a name="index">Function Index</a></h2>
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#explicit_cost_function-7">explicit_cost_function/7</a></td><td>Long function that makes you write all the arguments explixitly.</td></tr>
-<tr><td valign="top"><a href="#get-3">get/3</a></td><td>A shorter, more implicit cost function.</td></tr>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#get-3">get/3</a></td><td>Returns a cost of letting the elevator take an order.</td></tr>
+<tr><td valign="top"><a href="#get_order_cost-7">get_order_cost/7</a></td><td>Longer, more explicit version of cost_function:get/3.</td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
 
-<h3 class="function"><a name="explicit_cost_function-7">explicit_cost_function/7</a></h3>
-<div class="spec">
-<p><tt>explicit_cost_function(Elevator_node_id, Elevator_floor, Elevator_direction, Order_node_id, Order_flor, Order_direction, Number_of_floors) -&gt; any()</tt></p>
-</div><p>Long function that makes you write all the arguments explixitly</p>
-
 <h3 class="function"><a name="get-3">get/3</a></h3>
 <div class="spec">
-<p><tt>get(E::#e{node = any(), floor = integer(), dir = up | down | idle}, O::#o{}, Number_of_floors::integer()) -&gt; integer()</tt><br></p>
-</div><p>A shorter, more implicit cost function</p>
+<p><tt>get(Elevator::<a href="#type-elevator_tuple">elevator_tuple()</a>, Order::<a href="#type-order_tuple">order_tuple()</a>, Number_of_floors::integer()) -&gt; integer()</tt><br></p>
+</div><p>Returns a cost of letting the elevator take an order.
+  <h3><a name="Description">Description</a></h3><p>  
+Elevator is a tuple of an identifyer for the elevator, the floor it is on, and the state it is (up/down/idle)</p>
+ 
+  <p>Order is a tuple of the identifyer for the elevator that made the order, the destination-floor and the direction it was made in (hall_up, hall_down, cab)</p>
+ 
+  <h3><a name="Example">Example</a></h3>
+ 
+  <p>1&gt; cost_function:get( {node(), 1, up}, {node(), 1, hall_down}, 4).</p>
+ 
+  <p>5</p>
+ 
+  2&gt;</p>
+
+<h3 class="function"><a name="get_order_cost-7">get_order_cost/7</a></h3>
+<div class="spec">
+<p><tt>get_order_cost(Elevator_node::term(), Elevator_floor::integer(), Elevator_direction::up | down | idle, Order_node::atom() | pid(), Order_floor::integer(), Order_direction::hall_up | hall_down | cab, Number_of_floors::integer()) -&gt; integer()</tt><br></p>
+</div><p>Longer, more explicit version of cost_function:get/3.
+  <h3><a name="Description">Description</a></h3><p>  
+get_order_cost/7 works the same as get/3, but it forces the user to unpack everything, so that it might, hopefully become a bit easier to use</p>
+ 
+  Elevator_node and Order_node reffers to anything that can be used to separate two elevators capable of distinguishing two elevators from each other
+  <h3><a name="Example">Example</a></h3><p>  
+1&gt; cost_function:get_order_cost( "My elevator", 1, up, "Other elevator", 3, hall_down, 4).</p>
+ 
+  <p>4</p>
+ 
+  2&gt;</p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
