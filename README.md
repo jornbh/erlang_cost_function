@@ -1,6 +1,5 @@
-# Maybe project documentation can be linked 
+# README
 
+This will hopefully become a cost-function that can be used. 
 
-(doc/index.html)[doc/index.html]
-
-[doc/index.html](doc/index.html)
+[Documentation]([doc/index.html](https://jornbh.github.io/erlang_cost_function/doc/index.html))
