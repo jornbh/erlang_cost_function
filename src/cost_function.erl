@@ -117,7 +117,7 @@ simulator(Elev, Ord, N_floors, _) ->
 
 
 
-is_sane(Elev, Order, N_floors)->
+is_sane(Elev={_,_,_}, Order={_,_,_}, N_floors)->
     {_,E_floor, _} = Elev,
     {_,O_floor, O_dir} = Order,
     Is_sane = if
@@ -130,12 +130,17 @@ is_sane(Elev, Order, N_floors)->
         true                                           -> true
     end,
     case Is_sane of 
-        true -> Is_sane;
+        true -> ok;
         false -> 
-            io:format('Not sane:~p~n', [{Elev, Order, N_floors}]),
-            Is_sane
-    end.
+            io:format('Not sane:~p~n', [{Elev, Order, N_floors}])        
+    end, 
+    Is_sane;
+is_sane(Arg_1,Arg_2, Arg_3)-> 
+    io:format('Invalid input, got: ~p, ~p, ~p~n', [Arg_1,Arg_2, Arg_3]),
+    io:format('In Erlang, try something like:  cost_function:get( {"My elevator", 1, up}, {"Other elevator", 1, hall_down}, 4). ~n',[]),
+    io:format('In In elixir, try something like:  :cost_function.get( {"My elevator", 1, :up}, {"Other elevator", 1, :hall_down}, 4) ~n',[]),
 
+    exit("Cost-function got invalid input").
 
 
 % Debug
