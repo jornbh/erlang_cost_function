@@ -8,10 +8,16 @@ If you have something to separate your elevators from each other (When using =:=
 >2 
 ```
 
+
+
+Downloading does not work for elixir yet. 
+
+
+
 To add the cost-function to a rebar3-project, simply add the line/modify the deps-part of rebar.config to look like:
 ```
 {deps, [
-    {cost_function, {git, "https://github.com/jornbh/erlang_cost_function", {tag, "0.1.0"}}}
+    {cost_function, {git, "https://github.com/jornbh/erlang_cost_function", {tag, "v0.1.1"}}}
 ]}.
 ```
 If you want to use the library in an Elixir-project, modify `deps()` in mix.exs, so that it includes: 
@@ -20,7 +26,7 @@ If you want to use the library in an Elixir-project, modify `deps()` in mix.exs,
   defp deps do
     [
 
-      {:erlang_cost_function, git: "https://github.com/jornbh/erlang_cost_function", tag: "v0.1.0"},
+      {:cost_function, git: "https://github.com/jornbh/erlang_cost_function", tag: "v0.1.1"},
 
     ]
   end
